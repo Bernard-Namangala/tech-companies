@@ -2,6 +2,12 @@ import db from "../db";
 import moment from "moment";
 
 const companiesController = {
+  /**
+   * creates a new company
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} created company
+   */
   async create_company(request, response) {
     if (
       !request.body.name ||
@@ -36,6 +42,12 @@ const companiesController = {
       return response.status(400).send(error);
     }
   },
+  /**
+   * gets a list of all companies or filters them by location if location is provided
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} list of companies
+   */
   async list_companies(request, response) {
     let query = `SELECT * FROM companies`;
     let location_filter = null;
@@ -64,6 +76,13 @@ const companiesController = {
       }
     }
   },
+
+  /**
+   * gets a company with a specific id
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} company with specific id
+   */
   async getCompany(request, reesponse) {
     const text = "SELECT * FROM companies WHERE id = $1";
     try {
@@ -74,6 +93,37 @@ const companiesController = {
       return reesponse.status(200).send(rows[0]);
     } catch (error) {
       return reesponse.status(400).send(error);
+    }
+  },
+
+  /**
+   * Update a Companies info
+   * @param {object} request
+   * @param {object} response
+   * @returns {object} updated company
+   */
+  async update_company(request, response) {
+    const findOneQuery = "SELECT * FROM companies WHERE id=$1";
+    const updateOneQuery = `UPDATE companies
+      SET name=$1,location=$2,employees=$3,networth=$4,modified_date=$5
+      WHERE id=$6 returning *`;
+    try {
+      const { rows } = await db.query(findOneQuery, [request.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({ error: "Company not found" });
+      }
+      const values = [
+        request.body.name || rows[0].name,
+        request.location || rows[0].location,
+        request.body.employees || rows[0].employees,
+        request.body.networth || rows[0].networth,
+        moment(new Date()),
+        request.params.id,
+      ];
+      const updated = await db.query(updateOneQuery, values);
+      return response.status(200).send(updated.rows[0]);
+    } catch (err) {
+      return response.status(400).send(err);
     }
   },
 };
