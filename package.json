@@ -10,12 +10,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./ --out-dir build/ --ignore ./node_modules/,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "dev-start": "babel-watch index.js",
-    "start": "npm run build && node ./build/index.js",
-    "heroku-postbuild": "npm install"
+    "start": "node build/index.js",
+    "heroku-postbuild": "npm install && npm run build"
   },
   "author": "Bernard Namangala",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -24,9 +27,6 @@
     "regenerator-runtime": "^0.13.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
     "babel-watch": "^7.0.0"
   }
 }
