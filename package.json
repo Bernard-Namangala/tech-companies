@@ -4,7 +4,7 @@
   "description": "Top companies API",
   "main": "index.js",
   "engines": {
-    "node": "14.5.0"
+    "node": "12.18.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
