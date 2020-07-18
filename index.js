@@ -7,7 +7,7 @@ import createTable from "./createTable";
 dotenv.config();
 
 // creating database tables
-// createTable();
+createTable();
 
 const app = express();
 app.use(express.json());
