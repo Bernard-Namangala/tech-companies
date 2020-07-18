@@ -1,5 +1,5 @@
 import Router from "express";
-import controllers from "../controllers";
+import controllers from "../controllers/";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
