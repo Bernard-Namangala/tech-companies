@@ -1,8 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import routes from "./src/routes";
+import createTable from "./createTable";
 
+// dotenv to be used to acces environmental variables
 dotenv.config();
+
+// creating database tables
+// createTable();
 
 const app = express();
 app.use(express.json());
