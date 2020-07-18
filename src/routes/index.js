@@ -7,5 +7,7 @@ const router = Router();
 
 router.get("/", controllers.indexController);
 router.post("/create-company", controllers.companiesController.create_company);
+router.get("/list-companies", controllers.companiesController.list_companies);
+router.get("/get-company/:id", controllers.companiesController.getCompany);
 
 export default router;
