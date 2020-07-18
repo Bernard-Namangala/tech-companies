@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./ --out-dir build/ --ignore ./node_modules/,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "dev-start": "babel-watch index.js",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "heroku-postbuild": "npm install"
   },
   "author": "Bernard Namangala",
   "license": "ISC",
