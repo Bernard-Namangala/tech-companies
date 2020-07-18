@@ -11,6 +11,10 @@ router.post(
   "/update-company/:id",
   controllers.companiesController.update_company
 );
+router.post(
+  "/delete-company/:id",
+  controllers.companiesController.delete_company
+);
 router.get("/list-companies", controllers.companiesController.list_companies);
 router.get("/get-company/:id", controllers.companiesController.getCompany);
 

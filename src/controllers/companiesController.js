@@ -126,6 +126,26 @@ const companiesController = {
       return response.status(400).send(err);
     }
   },
+  /**
+   * Deletes a company with specifc id
+   * @param {object} request
+   * @param {object} response
+   * @returns {void} return status code 204 to indicate successful deletion
+   */
+  async delete_company(request, response) {
+    const deleteQuery = "DELETE FROM companies WHERE id=$1 returning *";
+    try {
+      const { rows } = await db.query(deleteQuery, [request.params.id]);
+      if (!rows[0]) {
+        return response.status(404).send({ error: "company not found" });
+      }
+      return response
+        .status(204)
+        .send({ success: "company deleted successfully" });
+    } catch (error) {
+      return response.status(400).send(error);
+    }
+  },
 };
 
 export default companiesController;
