@@ -7,11 +7,11 @@ const router = Router();
 
 router.get("/", controllers.indexController);
 router.post("/create-company", controllers.companiesController.create_company);
-router.post(
+router.put(
   "/update-company/:id",
   controllers.companiesController.update_company
 );
-router.post(
+router.delete(
   "/delete-company/:id",
   controllers.companiesController.delete_company
 );

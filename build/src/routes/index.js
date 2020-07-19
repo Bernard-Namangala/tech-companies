@@ -18,8 +18,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var router = (0, _express["default"])();
 router.get("/", _controllers["default"].indexController);
 router.post("/create-company", _controllers["default"].companiesController.create_company);
-router.post("/update-company/:id", _controllers["default"].companiesController.update_company);
-router.post("/delete-company/:id", _controllers["default"].companiesController.delete_company);
+router.put("/update-company/:id", _controllers["default"].companiesController.update_company);
+router["delete"]("/delete-company/:id", _controllers["default"].companiesController.delete_company);
 router.get("/list-companies", _controllers["default"].companiesController.list_companies);
 router.get("/get-company/:id", _controllers["default"].companiesController.getCompany);
 var _default = router;
