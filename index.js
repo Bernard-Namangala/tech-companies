@@ -11,10 +11,10 @@ createTable();
 
 const app = express();
 app.use(express.json());
+
+app.use("/api/v1/", routes);
+
 const port = process.env.PORT || 3000;
-
-app.use("/", routes);
-
 app.listen(port, () => {
   console.log("app running on port ", port);
 });
