@@ -1,31 +1,31 @@
 import pg from "pg";
 import dotenv from "dotenv";
+import { createTableQuery } from "./src/queries";
 
 dotenv.config();
 
-const pool = new pg.Pool({
+let pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
 });
+
+if (process.env.NODE_ENV === "development") {
+  pool = new pg.Pool({
+    user: "postgres",
+    host: "localhost",
+    database: "companies",
+    password: process.env.DATABASE_PASSWORD,
+    port: "5432",
+  });
+}
 
 /**
  * Create Tables
  */
 const createTable = () => {
-  const queryText = `CREATE TABLE IF NOT EXISTS
-      companies(
-        id serial PRIMARY KEY,
-        name VARCHAR(128) NOT NULL,
-        location VARCHAR(128) NOT NULL,
-        employees integer NOT NULL,
-        networth integer NOT NULL,
-        added_date TIMESTAMP,
-        modified_date TIMESTAMP
-      )`;
-
   pool
-    .query(queryText)
+    .query(createTableQuery)
     .then((res) => {
-      console.log(res);
+      console.log("Connected to database");
       pool.end();
     })
     .catch((err) => {

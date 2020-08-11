@@ -17,8 +17,8 @@ _dotenv["default"].config(); // creating database tables
 (0, _createTable["default"])();
 var app = (0, _express["default"])();
 app.use(_express["default"].json());
+app.use("/api/v1/", _routes["default"]);
 var port = process.env.PORT || 3000;
-app.use("/", _routes["default"]);
 app.listen(port, function () {
   console.log("app running on port ", port);
 });

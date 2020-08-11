@@ -1,21 +1,28 @@
 import Router from "express";
-import controllers from "../controllers/";
+import controllers from "../controllers";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 const router = Router();
+const { companiesController } = controllers;
+const {
+  createCompany,
+  updateCompany,
+  deleteCompany,
+  listCompanies,
+  getCompany,
+} = companiesController;
 
 router.get("/", controllers.indexController);
-router.post("/create-company", controllers.companiesController.create_company);
-router.put(
-  "/update-company/:id",
-  controllers.companiesController.update_company
-);
-router.delete(
-  "/delete-company/:id",
-  controllers.companiesController.delete_company
-);
-router.get("/list-companies", controllers.companiesController.list_companies);
-router.get("/get-company/:id", controllers.companiesController.getCompany);
+
+router.post("/create-company", createCompany);
+
+router.put("/update-company/:id", updateCompany);
+
+router.delete("/delete-company/:id", deleteCompany);
+
+router.get("/list-companies", listCompanies);
+
+router.get("/get-company/:id", getCompany);
 
 export default router;

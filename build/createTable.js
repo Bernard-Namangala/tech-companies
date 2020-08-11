@@ -9,6 +9,8 @@ var _pg = _interopRequireDefault(require("pg"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
+var _queries = require("./src/queries");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _dotenv["default"].config();
@@ -16,14 +18,24 @@ _dotenv["default"].config();
 var pool = new _pg["default"].Pool({
   connectionString: process.env.DATABASE_URL
 });
+
+if (process.env.NODE_ENV === "development") {
+  pool = new _pg["default"].Pool({
+    user: "postgres",
+    host: "localhost",
+    database: "companies",
+    password: process.env.DATABASE_PASSWORD,
+    port: "5432"
+  });
+}
 /**
  * Create Tables
  */
 
+
 var createTable = function createTable() {
-  var queryText = "CREATE TABLE IF NOT EXISTS\n      companies(\n        id serial PRIMARY KEY,\n        name VARCHAR(128) NOT NULL,\n        location VARCHAR(128) NOT NULL,\n        employees integer NOT NULL,\n        networth integer NOT NULL,\n        added_date TIMESTAMP,\n        modified_date TIMESTAMP\n      )";
-  pool.query(queryText).then(function (res) {
-    console.log(res);
+  pool.query(_queries.createTableQuery).then(function (res) {
+    console.log("Connected to database");
     pool.end();
   })["catch"](function (err) {
     console.log(err);
