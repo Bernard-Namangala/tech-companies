@@ -17,15 +17,17 @@ export const filterCompanies = (companies, queryStrings) => {
         return (
           locationArray.includes(
             company.location.replace(/\s/g).toLowerCase()
-          ) && nameArray.includes(company.name.replace(/\s/g).toLowerCase())
+          ) && nameArray.includes(company.name.replace(/\s/g, "").toLowerCase())
         );
       } else if (nameArray[0] !== "") {
         //   if user wants to filter by name alone
-        return nameArray.includes(company.name.replace(/\s/g).toLowerCase());
+        return nameArray.includes(
+          company.name.replace(/\s/g, "").toLowerCase()
+        );
       } else {
         //   if user wants to filter by location alone
         return locationArray.includes(
-          companylocation.replace(/\s/g).toLowerCase()
+          companylocation.replace(/\s/g, "").toLowerCase()
         );
       }
     });
