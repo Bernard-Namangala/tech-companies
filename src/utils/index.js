@@ -12,8 +12,6 @@ export const filterCompanies = (companies, queryStrings) => {
     companies = companies.filter((company) => {
       const locationArray = queryStringsArray["location"];
       const nameArray = queryStringsArray["name"];
-      console.log(company.name.replace(/\s/g, "").toLowerCase());
-      console.log(nameArray);
 
       if (nameArray[0] !== "" && locationArray[0] !== "") {
         return (
