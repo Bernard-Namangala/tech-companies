@@ -6,7 +6,9 @@ import {
   updateFindOneQuery,
   updateQuery,
   deleteQuery,
+  listCompaniesQuery,
 } from "../queries";
+import { filterCompanies } from "../utils";
 
 const companiesController = {
   /**
@@ -22,7 +24,7 @@ const companiesController = {
       // if any of the required fields aree missing inform user
       return response.status(400).send({
         error:
-          "All fields are required to create a company 'name, location, number of employees and companies networth'W",
+          "All fields are required to create a company 'name, location, number of employees and companies networth'",
       });
     }
 
@@ -49,32 +51,12 @@ const companiesController = {
    * @returns {object} list of companies
    */
   async listCompanies(request, response) {
-    let query = `SELECT * FROM companies`;
-    let location_filter = null;
-    const { location } = request.query;
-
-    // if user has got a location filter
-    if (location !== undefined) {
-      location_filter = location;
-      query = "SELECT * FROM companies WHERE lower(location)=lower($1)";
-    }
-
-    if (location_filter === null) {
-      // if user is not filtering by location
-      try {
-        const { rows, rowCount } = await db.query(query);
-        return response.status(200).send({ rows, rowCount });
-      } catch (error) {
-        return response.status(400).send(error);
-      }
-    } else {
-      // if user wants to filter by location
-      try {
-        const { rows, rowCount } = await db.query(query, [location_filter]);
-        return response.status(200).send({ rows, rowCount });
-      } catch (error) {
-        return response.status(400).send(error);
-      }
+    try {
+      const { rows, rowCount } = await db.query(listCompaniesQuery);
+      const companies = filterCompanies(rows, request.query);
+      return response.status(200).send({ companies });
+    } catch (error) {
+      return response.status(400).send(error);
     }
   },
 

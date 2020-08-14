@@ -14,6 +14,8 @@ companies(name, location, employees, networth, added_date, modified_date)
 VALUES($1, $2, $3, $4, $5, $6)
 returning *`;
 
+export const listCompaniesQuery = `SELECT * FROM companies`;
+
 export const getCompanyQuery = `SELECT * FROM companies WHERE id = $1`;
 
 export const updateFindOneQuery = "SELECT * FROM companies WHERE id=$1";
