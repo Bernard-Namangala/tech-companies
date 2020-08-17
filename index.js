@@ -15,6 +15,8 @@ app.use(express.json());
 app.use("/api/v1/", routes);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("app running on port ", port);
 });
+
+export default server;
