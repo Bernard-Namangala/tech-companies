@@ -9,7 +9,7 @@
   "scripts": {
     "test": "env NODE_ENV=development mocha ./test/**/*.js --require @babel/register",
     "build": "babel ./ --out-dir build/ --ignore ./node_modules/,./.babelrc,./package.json,./npm-debug.log",
-    "dev-start": "NODE_ENV='development' babel-watch index.js",
+    "dev-start": "babel-watch index.js",
     "start": "node /app/build/index.js",
     "heroku-postbuild": "npm install"
   },

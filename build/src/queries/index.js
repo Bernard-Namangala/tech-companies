@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteQuery = exports.updateQuery = exports.updateFindOneQuery = exports.getCompanyQuery = exports.createCompanyQuery = exports.createTableQuery = void 0;
+exports.deleteQuery = exports.updateQuery = exports.updateFindOneQuery = exports.getCompanyQuery = exports.listCompaniesQuery = exports.createCompanyQuery = exports.createTableQuery = void 0;
 var createTableQuery = "CREATE TABLE IF NOT EXISTS\ncompanies(\n  id serial PRIMARY KEY,\n  name VARCHAR(128) NOT NULL,\n  location VARCHAR(128) NOT NULL,\n  employees integer NOT NULL,\n  networth integer NOT NULL,\n  added_date TIMESTAMP,\n  modified_date TIMESTAMP\n)";
 exports.createTableQuery = createTableQuery;
 var createCompanyQuery = "INSERT INTO\ncompanies(name, location, employees, networth, added_date, modified_date)\nVALUES($1, $2, $3, $4, $5, $6)\nreturning *";
 exports.createCompanyQuery = createCompanyQuery;
+var listCompaniesQuery = "SELECT * FROM companies";
+exports.listCompaniesQuery = listCompaniesQuery;
 var getCompanyQuery = "SELECT * FROM companies WHERE id = $1";
 exports.getCompanyQuery = getCompanyQuery;
 var updateFindOneQuery = "SELECT * FROM companies WHERE id=$1";

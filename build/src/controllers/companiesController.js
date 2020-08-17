@@ -11,6 +11,8 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _queries = require("../queries");
 
+var _utils = require("../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -40,7 +42,7 @@ var companiesController = {
               }
 
               return _context.abrupt("return", response.status(400).send({
-                error: "All fields are required to create a company 'name, location, number of employees and companies networth'W"
+                error: "All fields are required to create a company 'name, location, number of employees and companies networth'"
               }));
 
             case 3:
@@ -76,73 +78,36 @@ var companiesController = {
    */
   listCompanies: function listCompanies(request, response) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      var query, location_filter, location, _yield$db$query2, rows, rowCount, _yield$db$query3, _rows, _rowCount;
+      var _yield$db$query2, rows, rowCount, companies;
 
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              query = "SELECT * FROM companies";
-              location_filter = null;
-              location = request.query.location; // if user has got a location filter
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _db["default"].query(_queries.listCompaniesQuery);
 
-              if (location !== undefined) {
-                location_filter = location;
-                query = "SELECT * FROM companies WHERE lower(location)=lower($1)";
-              }
-
-              if (!(location_filter === null)) {
-                _context2.next = 19;
-                break;
-              }
-
-              _context2.prev = 5;
-              _context2.next = 8;
-              return _db["default"].query(query);
-
-            case 8:
+            case 3:
               _yield$db$query2 = _context2.sent;
               rows = _yield$db$query2.rows;
               rowCount = _yield$db$query2.rowCount;
+              companies = (0, _utils.filterCompanies)(rows, request.query);
               return _context2.abrupt("return", response.status(200).send({
-                rows: rows,
-                rowCount: rowCount
+                companies: companies
               }));
 
-            case 14:
-              _context2.prev = 14;
-              _context2.t0 = _context2["catch"](5);
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](0);
               return _context2.abrupt("return", response.status(400).send(_context2.t0));
 
-            case 17:
-              _context2.next = 31;
-              break;
-
-            case 19:
-              _context2.prev = 19;
-              _context2.next = 22;
-              return _db["default"].query(query, [location_filter]);
-
-            case 22:
-              _yield$db$query3 = _context2.sent;
-              _rows = _yield$db$query3.rows;
-              _rowCount = _yield$db$query3.rowCount;
-              return _context2.abrupt("return", response.status(200).send({
-                rows: _rows,
-                rowCount: _rowCount
-              }));
-
-            case 28:
-              _context2.prev = 28;
-              _context2.t1 = _context2["catch"](19);
-              return _context2.abrupt("return", response.status(400).send(_context2.t1));
-
-            case 31:
+            case 13:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[5, 14], [19, 28]]);
+      }, _callee2, null, [[0, 10]]);
     }))();
   },
 
@@ -154,7 +119,7 @@ var companiesController = {
    */
   getCompany: function getCompany(request, response) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var _yield$db$query4, rows;
+      var _yield$db$query3, rows;
 
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
@@ -165,8 +130,8 @@ var companiesController = {
               return _db["default"].query(_queries.getCompanyQuery, [request.params.id]);
 
             case 3:
-              _yield$db$query4 = _context3.sent;
-              rows = _yield$db$query4.rows;
+              _yield$db$query3 = _context3.sent;
+              rows = _yield$db$query3.rows;
 
               if (rows[0]) {
                 _context3.next = 7;
@@ -202,7 +167,7 @@ var companiesController = {
    */
   updateCompany: function updateCompany(request, response) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-      var _request$body2, name, location, employees, networth, _yield$db$query5, rows, values, updated;
+      var _request$body2, name, location, employees, networth, _yield$db$query4, rows, values, updated;
 
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -214,8 +179,8 @@ var companiesController = {
               return _db["default"].query(_queries.updateFindOneQuery, [request.params.id]);
 
             case 4:
-              _yield$db$query5 = _context4.sent;
-              rows = _yield$db$query5.rows;
+              _yield$db$query4 = _context4.sent;
+              rows = _yield$db$query4.rows;
 
               if (rows[0]) {
                 _context4.next = 8;
@@ -257,7 +222,7 @@ var companiesController = {
    */
   deleteCompany: function deleteCompany(request, response) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var _yield$db$query6, rows;
+      var _yield$db$query5, rows;
 
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
@@ -268,8 +233,8 @@ var companiesController = {
               return _db["default"].query(_queries.deleteQuery, [request.params.id]);
 
             case 3:
-              _yield$db$query6 = _context5.sent;
-              rows = _yield$db$query6.rows;
+              _yield$db$query5 = _context5.sent;
+              rows = _yield$db$query5.rows;
 
               if (rows[0]) {
                 _context5.next = 7;
