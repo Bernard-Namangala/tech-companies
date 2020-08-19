@@ -27,3 +27,13 @@ export const getCompaniesData = [
     modified_date: "2020-08-08T16:05:36.853Z",
   },
 ];
+
+export const createCompanyData = {
+  id: 2,
+  name: "Bongo Hive",
+  location: "chongwe",
+  employees: 20,
+  networth: 80000,
+  added_date: "2020-07-18T15:33:58.198Z",
+  modified_date: "2020-08-08T16:05:36.853Z",
+};
