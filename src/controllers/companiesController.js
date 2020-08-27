@@ -24,7 +24,7 @@ const companiesController = {
       // if any of the required fields aree missing inform user
       return response.status(400).send({
         error:
-          "All fields are required to create a company 'name, location, number of employees and companies networth'",
+          "All fields are required to create a company 'name, location, number of employees and companies networth",
       });
     }
 

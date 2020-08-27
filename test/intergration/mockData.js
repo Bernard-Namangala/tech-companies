@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getCompaniesData = [
   {
     id: 3,
@@ -28,12 +30,18 @@ export const getCompaniesData = [
   },
 ];
 
-export const createCompanyData = {
-  id: 2,
+export const createCompanyData = [
+  "Bongo Hive",
+  "chongwe",
+  20,
+  80000,
+  moment(new Date()),
+  moment(new Date()),
+];
+
+export const createCompanyMock = {
   name: "Bongo Hive",
   location: "chongwe",
   employees: 20,
   networth: 80000,
-  added_date: "2020-07-18T15:33:58.198Z",
-  modified_date: "2020-08-08T16:05:36.853Z",
 };
