@@ -23,4 +23,4 @@ after_success:
   - nyc report --reporter=text-lcov | coveralls
 
 addons:
-  postgresql: "12"
+  postgresql: "9.6"
