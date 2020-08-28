@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Bernard-Namangala/tech-companies.svg?branch=develop)](https://travis-ci.org/Bernard-Namangala/tech-companies)
+
 # Tech Companies node js app
 
 ### This is what a single company object is made up of
