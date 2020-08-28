@@ -20,7 +20,7 @@ script:
   - npm run test
 
 after_success:
-  - nyc report --reporter=text-lcov | coveralls
+  - npm run coverrals
 
 addons:
   postgresql: "9.6"
