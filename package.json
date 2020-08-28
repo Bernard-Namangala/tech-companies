@@ -11,7 +11,8 @@
     "build": "babel ./ --out-dir build/ --ignore ./node_modules/,./.babelrc,./package.json,./npm-debug.log",
     "dev-start": "env NODE_ENV=development babel-watch index.js",
     "start": "node /app/build/index.js",
-    "heroku-postbuild": "npm install"
+    "heroku-postbuild": "npm install",
+    "lint": "./node_modules/.bin/eslint src/  --fix"
   },
   "author": "Bernard Namangala",
   "license": "ISC",
@@ -32,6 +33,7 @@
     "babel-watch": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "eslint": "^7.7.0",
     "mocha": "^8.1.1",
     "rimraf": "^3.0.2",
     "sinon": "^9.0.3"
