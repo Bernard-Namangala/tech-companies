@@ -1,5 +1,0 @@
-test:
-  adapter: postgresql
-  database: testing_companies
-  username: postgres
-  password: learning_node

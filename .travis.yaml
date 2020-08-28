@@ -13,7 +13,6 @@ services:
 
 before_script:
   - psql -c 'CREATE DATABASE testing_companies;' -U postgres
-  - cp database.yml.travis config/database.yml
 
 script:
   - npm run lint

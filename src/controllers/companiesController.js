@@ -1,5 +1,5 @@
-import db from '../db';
-import moment from 'moment';
+import db from "../db";
+import moment from "moment";
 import {
 	createCompanyQuery,
 	getCompanyQuery,
@@ -7,8 +7,8 @@ import {
 	updateQuery,
 	deleteQuery,
 	listCompaniesQuery,
-} from '../queries';
-import { filterCompanies } from '../utils';
+} from "../queries";
+import { filterCompanies } from "../utils";
 
 const companiesController = {
 	/**
@@ -24,7 +24,7 @@ const companiesController = {
 			// if any of the required fields aree missing inform user
 			return response.status(400).send({
 				error:
-          'All fields are required to create a company \'name, location, number of employees and companies networth',
+          "All fields are required to create a company 'name, location, number of employees and companies networth",
 			});
 		}
 
@@ -70,7 +70,7 @@ const companiesController = {
 		try {
 			const { rows } = await db.query(getCompanyQuery, [request.params.id]);
 			if (!rows[0]) {
-				return response.status(404).send({ error: 'Company not found' });
+				return response.status(404).send({ error: "Company not found" });
 			}
 			return response.status(200).send(rows[0]);
 		} catch (error) {
@@ -89,7 +89,7 @@ const companiesController = {
 		try {
 			const { rows } = await db.query(updateFindOneQuery, [request.params.id]);
 			if (!rows[0]) {
-				return response.status(404).send({ error: 'Company not found' });
+				return response.status(404).send({ error: "Company not found" });
 			}
 
 			const values = [
@@ -116,11 +116,11 @@ const companiesController = {
 		try {
 			const { rows } = await db.query(deleteQuery, [request.params.id]);
 			if (!rows[0]) {
-				return response.status(404).send({ error: 'company not found' });
+				return response.status(404).send({ error: "company not found" });
 			}
 			return response
 				.status(204)
-				.send({ success: 'company deleted successfully' });
+				.send({ success: "company deleted successfully" });
 		} catch (error) {
 			return response.status(400).send(error);
 		}

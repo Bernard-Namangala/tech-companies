@@ -1,5 +1,5 @@
-import indexController from './indexController';
-import companiesController from './companiesController';
+import indexController from "./indexController";
+import companiesController from "./companiesController";
 
 export default {
 	indexController,

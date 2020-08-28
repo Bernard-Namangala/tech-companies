@@ -7,27 +7,27 @@
 export const filterCompanies = (companies, queryStrings) => {
 	const queryStringsArray = extractQueryStrings(queryStrings);
 
-	if (queryStrings['location'] || queryStrings['name']) {
+	if (queryStrings["location"] || queryStrings["name"]) {
 		//   if user wants to filter by both location and name
 		companies = companies.filter((company) => {
-			const locationArray = queryStringsArray['location'];
-			const nameArray = queryStringsArray['name'];
+			const locationArray = queryStringsArray["location"];
+			const nameArray = queryStringsArray["name"];
 
-			if (nameArray[0] !== '' && locationArray[0] !== '') {
+			if (nameArray[0] !== "" && locationArray[0] !== "") {
 				return (
 					locationArray.includes(
-						company.location.replace(/\s/g, '').toLowerCase()
-					) && nameArray.includes(company.name.replace(/\s/g, '').toLowerCase())
+						company.location.replace(/\s/g, "").toLowerCase()
+					) && nameArray.includes(company.name.replace(/\s/g, "").toLowerCase())
 				);
-			} else if (nameArray[0] !== '') {
+			} else if (nameArray[0] !== "") {
 				//   if user wants to filter by name alone
 				return nameArray.includes(
-					company.name.replace(/\s/g, '').toLowerCase()
+					company.name.replace(/\s/g, "").toLowerCase()
 				);
 			} else {
 				//   if user wants to filter by location alone
 				return locationArray.includes(
-					company.location.replace(/\s/g, '').toLowerCase()
+					company.location.replace(/\s/g, "").toLowerCase()
 				);
 			}
 		});
@@ -41,18 +41,18 @@ export const filterCompanies = (companies, queryStrings) => {
  * @returns {object} cleaned query strings
  */
 export const extractQueryStrings = (queryStrings) => {
-	let locationQueryStrings = queryStrings['location'];
-	let nameQueryStrngs = queryStrings['name'];
+	let locationQueryStrings = queryStrings["location"];
+	let nameQueryStrngs = queryStrings["name"];
 
 	if (nameQueryStrngs === undefined) {
-		nameQueryStrngs = '';
+		nameQueryStrngs = "";
 	}
 	if (locationQueryStrings === undefined) {
-		locationQueryStrings = '';
+		locationQueryStrings = "";
 	}
 
 	return {
-		location: locationQueryStrings.replace(/\s/g, '').toLowerCase().split(','),
-		name: nameQueryStrngs.replace(/\s/g, '').toLowerCase().split(','),
+		location: locationQueryStrings.replace(/\s/g, "").toLowerCase().split(","),
+		name: nameQueryStrngs.replace(/\s/g, "").toLowerCase().split(","),
 	};
 };
