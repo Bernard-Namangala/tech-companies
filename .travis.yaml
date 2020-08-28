@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "12"
+
+install:
+  - npm install
+cache:
+  directories:
+    - "node_modules"
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'CREATE DATABASE testing_companies;' -U postgres
+  - cp database.yml.travis config/database.yml
+
+script:
+  - npm run lint
+  - npm run test
+
+after_success:
+  - nyc report --reporter=text-lcov | coveralls
