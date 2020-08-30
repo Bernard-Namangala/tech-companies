@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Bernard-Namangala/tech-companies.svg?branch=develop)](https://travis-ci.org/Bernard-Namangala/tech-companies)
 
+[![Coverage Status](https://coveralls.io/repos/github/Bernard-Namangala/tech-companies/badge.svg?branch=master)](https://coveralls.io/github/Bernard-Namangala/tech-companies?branch=master)
 # Tech Companies node js app
 
 ### This is what a single company object is made up of
