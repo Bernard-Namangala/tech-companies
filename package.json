@@ -7,13 +7,13 @@
     "node": "14.5.0"
   },
   "scripts": {
-    "test": "env NODE_ENV=testing mocha ./test/**/*.js --require @babel/register",
+    "test": "env NODE_ENV=testing nyc mocha ./test/**/*.js --require @babel/register",
     "build": "babel ./ --out-dir build/ --ignore ./node_modules/,./.babelrc,./package.json,./npm-debug.log",
     "dev-start": "env NODE_ENV=development babel-watch index.js",
     "start": "node /app/build/index.js",
     "heroku-postbuild": "npm install",
     "lint": "./node_modules/.bin/eslint src/  --fix",
-    "coveralls": "test --coverage && cat ./tests/intergration/coverage/lcov.info | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Bernard Namangala",
   "license": "ISC",
