@@ -20,7 +20,7 @@ script:
   - npm run test
 
 after_success:
-  - npm run coverrals
+  - npm run coveralls
 
 addons:
   postgresql: "9.6"
